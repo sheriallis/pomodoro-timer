@@ -1,17 +1,100 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #292a2b;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App {
+h1,
+h2 {
   text-align: center;
+  color: #fff;
+}
+
+#time-left {
+  font-size: 8rem;
+}
+
+#start_stop,
+#reset {
+  margin-top: 40px;
+}
+
+button {
+  font-size: 1.2rem;
+  background-color: #fff;
+  border: none;
+  padding: 8px 20px;
+  margin: 8px;
+}
+
+#timer-container header {
+  padding: 30px;
+  flex-direction: column;
+  background-color: #eb144c;
+  color: #fff;
+  border-radius: 40px 40px 0 0;
+}
+
+.fas {
+  padding: 8px;
+}
+
+.fa-arrow-circle-down,
+.fa-arrow-circle-up {
+  font-size: 2rem;
+  color: #eb144c;
+}
+
+.adjust-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 45%;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 0 0 40px 40px;
+  background-color: #fff;
+}
+
+#timer-container {
+  width: 45vw;
+}
+
+.time-adjust-wrapper {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-arrow-circle-up:hover,
+.fa-arrow-circle-down:hover {
+  color: #134da0;
+}
+
+p {
+  margin: 8px;
 }
