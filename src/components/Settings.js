@@ -3,7 +3,7 @@ import React from "react";
 function Settings(props) {
   return (
     <div className="time-adjust-wrapper">
-      <h3 id="session-label">{props.label} Length</h3>
+      <h3 id={`${props.mode}-label`}>{props.label} Length</h3>
       <div className="adjust-time">
         <span
           id={`${props.mode}-increment`}
