@@ -1,58 +1,79 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles.css';
+import React from "react";
+import ReactDOM from "react-dom";
 
-function App() {
-  return (
-    <div id="App">
-      <h1>Pomodoro Timer</h1>
-      <div id="timer-container">
+import Timer from "./components/Timer";
+import Settings from "./components/Settings";
+
+import "./styles.css";
+
+class App extends React.Component {
+  state = {
+    break_length: 5,
+    session_length: 25,
+    mode: "Session"
+  };
+
+  increment = mode => {
+    if (mode === "session") {
+      this.setState({
+        session_length: this.state.session_length + 1
+      });
+    } else if (mode === "break") {
+      this.setState({
+        break_length: this.state.break_length + 1
+      });
+    }
+  };
+
+  decrement = mode => {
+    if (mode === "session") {
+      this.setState({
+        session_length: this.state.session_length - 1
+      });
+    } else if (mode === "break") {
+      this.setState({
+        break_length: this.state.break_length - 1
+      });
+    }
+  };
+
+  reset = () => {
+    this.setState({
+      break_length: 5,
+      session_length: 25
+    });
+  };
+
+  render() {
+    return (
+      <div id="app-container">
         <header className="flex-center">
-          <h2 id="timer-label">Session</h2>
-          <div id="time-left">25:00</div>
-          <div className="wrapper">
-            <button id="start_stop">
-              <i className="fas fa-play" /> Start
-            </button>
-            <button id="reset">
-              <i className="fas fa-sync-alt" /> Reset
-            </button>
-          </div>
+          <Timer
+            mode={this.state.mode}
+            reset={this.reset}
+            session_length={this.state.session_length}
+          />
         </header>
         <footer>
-          <div className="time-adjust-wrapper">
-            <h3 id="break-label">Session Length</h3>
-            <div class="adjust-time">
-              <span id="session-increment">
-                <i className="fas fa-arrow-circle-up" />
-              </span>
-              <p>
-                <span id="session-length"> 25</span> min
-              </p>
-              <span id="session-decrement">
-                <i className="fas fa-arrow-circle-down" />
-              </span>
-            </div>
-          </div>
-
-          <div className="time-adjust-wrapper">
-            <h3 id="session-label">Break Length</h3>
-            <div className="adjust-time">
-              <span id="break-increment">
-                <i className="fas fa-arrow-circle-up" />
-              </span>
-              <p>
-                <span id="break-length"> 5</span> min
-              </p>
-              <span id="break-decrement">
-                <i className="fas fa-arrow-circle-down" />
-              </span>
-            </div>
-          </div>
+          <Settings
+            label="Session"
+            mode="session"
+            length={this.state.session_length}
+            increment={this.increment}
+            decrement={this.decrement}
+          />
+          <Settings
+            label="Break"
+            mode="break"
+            length={this.state.break_length}
+            increment={this.increment}
+            decrement={this.decrement}
+          />
         </footer>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);

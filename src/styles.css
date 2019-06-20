@@ -10,6 +10,7 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -45,7 +46,7 @@ button {
   margin: 8px;
 }
 
-#timer-container header {
+#app-container header {
   padding: 30px;
   flex-direction: column;
   background-color: #eb144c;
@@ -67,7 +68,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 45%;
+  width: 80%;
 }
 
 footer {
@@ -78,7 +79,7 @@ footer {
   background-color: #fff;
 }
 
-#timer-container {
+#app-container {
   width: 45vw;
 }
 
