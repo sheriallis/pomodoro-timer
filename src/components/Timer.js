@@ -9,7 +9,7 @@ function Timer(props) {
         <button id="start_stop">
           <i className="fas fa-play" /> Start
         </button>
-        <button id="reset">
+        <button id="reset" onClick={props.reset}>
           <i className="fas fa-sync-alt" /> Reset
         </button>
       </div>
