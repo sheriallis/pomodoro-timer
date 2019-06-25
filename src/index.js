@@ -10,25 +10,38 @@ class App extends React.Component {
   state = {
     break_length: 5,
     session_length: 25,
-    mode: "Session"
+    mode: "Session",
+    displayTime: 25,
+    timerRunning: false
   };
 
   increment = mode => {
+    if(this.state.timerRunning === true){
+      return;
+    }
+
     if (mode === "session") {
       this.setState({
-        session_length: this.state.session_length + 1
+        session_length: this.state.session_length + 1,
+        displayTime: this.state.displayTime + 1
       });
     } else if (mode === "break") {
       this.setState({
-        break_length: this.state.break_length + 1
+        break_length: this.state.break_length + 1,
+
       });
     }
   };
 
   decrement = mode => {
+    if(this.state.timerRunning === true){
+      return;
+    }
+
     if (mode === "session") {
       this.setState({
-        session_length: this.state.session_length - 1
+        session_length: this.state.session_length - 1,
+        displayTime: this.state.displayTime - 1
       });
     } else if (mode === "break") {
       this.setState({
@@ -40,9 +53,48 @@ class App extends React.Component {
   reset = () => {
     this.setState({
       break_length: 5,
-      session_length: 25
+      session_length: 25,
+      displayTime: 25,
+      timerRunning: false
     });
+
+    clearInterval(this.countdown);
   };
+
+  countDownTimer = (minutes) => {
+    const seconds = minutes * 60;
+    const beginTime = Date.now();
+    const endTime = beginTime + seconds * 1000;
+    this.displayTimeLeft(seconds);
+
+    this.countdown = setInterval(() => {
+      const secondsLeft = Math.round((endTime - Date.now()) / 1000);
+  
+      if (secondsLeft < 0) {
+        clearInterval(this.countdown);
+        return;
+      }
+      this.displayTimeLeft(secondsLeft);
+    }, 1000);
+
+    this.setState({
+      timerRunning: true
+    })
+
+  }
+
+  displayTimeLeft = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    document.getElementById("time-left").innerText = this.formatTime(minutes, remainingSeconds);
+  }
+
+  formatTime = (minutes, remainingSeconds) => {
+    return `${minutes < 10 ? 0 : ""}${minutes}:${
+      remainingSeconds < 10 ? 0 : ""
+    }${remainingSeconds}`;
+  }
 
   render() {
     return (
@@ -52,6 +104,8 @@ class App extends React.Component {
             mode={this.state.mode}
             reset={this.reset}
             session_length={this.state.session_length}
+            displayTime={this.state.displayTime}
+            countDownTimer={this.countDownTimer}
           />
         </header>
         <footer>

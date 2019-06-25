@@ -1,25 +1,25 @@
 import React from "react";
 
-function Settings(props) {
+function Settings({label, mode, length, increment, decrement}) {
   return (
     <div className="time-adjust-wrapper">
-      <h3 id={`${props.mode}-label`}>{props.label} Length</h3>
+      <h3 id={`${mode}-label`}>{label} Length</h3>
       <div className="adjust-time">
         <span
-          id={`${props.mode}-increment`}
+          id={`${mode}-increment`}
           onClick={() => {
-            props.increment(props.mode);
+            increment(mode);
           }}
         >
           <i className="fas fa-arrow-circle-up" />
         </span>
         <p>
-          <span id={`${props.mode}-length`}> {props.length} </span> min
+          <span id={`${mode}-length`}> {length} </span> min
         </p>
         <span
-          id={`${props.mode}-decrement`}
+          id={`${mode}-decrement`}
           onClick={() => {
-            props.decrement(props.mode);
+            decrement(mode);
           }}
         >
           <i className="fas fa-arrow-circle-down" />
