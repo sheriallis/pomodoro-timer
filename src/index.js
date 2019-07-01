@@ -49,6 +49,9 @@ class App extends React.Component {
   };
 
   reset = () => {
+    this.beep.pause();
+    this.beep.currentTime = 0;
+
     this.setState({
       break_length: 5,
       session_length: 25,
@@ -72,6 +75,7 @@ class App extends React.Component {
       const secondsLeft = Math.round((endTime - Date.now()) / 1000);
   
       if (secondsLeft < 0) {
+        this.beep.play();
         clearInterval(this.countdown);
         // Switch between Break and Session mode
         if(this.state.mode === "Session"){
@@ -141,6 +145,12 @@ class App extends React.Component {
             decrement={this.decrement}
           />
         </footer>
+        <audio 
+          id="beep" 
+          preload="auto"
+          src="pomodoro-beep.mp3"
+          ref={(audio) => {this.beep = audio}}
+        />
       </div>
     );
   }
