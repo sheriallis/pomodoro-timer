@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactFCCtest from 'react-fcctest';
 
 import Timer from "./components/Timer";
 import Settings from "./components/Settings";
@@ -99,6 +100,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="app-container">
+         <ReactFCCtest />
         <header className="flex-center">
           <Timer
             mode={this.state.mode}
