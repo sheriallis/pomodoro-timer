@@ -14,7 +14,7 @@ function Settings({label, mode, length, increment, decrement}) {
           <i className="fas fa-arrow-circle-up" />
         </span>
         <p>
-          <span id={`${mode}-length`}> {length} </span> min
+          <span id={`${mode}-length`}>{length}</span> min
         </p>
         <span
           id={`${mode}-decrement`}

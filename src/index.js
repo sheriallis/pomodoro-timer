@@ -12,7 +12,6 @@ class App extends React.Component {
     break_length: 5,
     session_length: 25,
     mode: "Session",
-    displayTime: 25,
     timerRunning: false
   };
 
@@ -21,12 +20,11 @@ class App extends React.Component {
       return;
     }
 
-    if (mode === "session") {
+    if (mode === "session" && this.state.session_length <= 59) {
       this.setState({
         session_length: this.state.session_length + 1,
-        displayTime: this.state.displayTime + 1
       });
-    } else if (mode === "break") {
+    } else if (mode === "break" && this.state.break_length <= 59) {
       this.setState({
         break_length: this.state.break_length + 1,
 
@@ -39,12 +37,11 @@ class App extends React.Component {
       return;
     }
 
-    if (mode === "session") {
+    if (mode === "session" && this.state.session_length >= 2) {
       this.setState({
         session_length: this.state.session_length - 1,
-        displayTime: this.state.displayTime - 1
       });
-    } else if (mode === "break") {
+    } else if (mode === "break" && this.state.break_length >= 2) {
       this.setState({
         break_length: this.state.break_length - 1
       });
@@ -55,7 +52,6 @@ class App extends React.Component {
     this.setState({
       break_length: 5,
       session_length: 25,
-      displayTime: 25,
       timerRunning: false
     });
 
@@ -66,6 +62,7 @@ class App extends React.Component {
     const seconds = minutes * 60;
     const beginTime = Date.now();
     const endTime = beginTime + seconds * 1000;
+    clearInterval(this.countdown);
     this.displayTimeLeft(seconds);
 
     this.countdown = setInterval(() => {
@@ -106,7 +103,6 @@ class App extends React.Component {
             mode={this.state.mode}
             reset={this.reset}
             session_length={this.state.session_length}
-            displayTime={this.state.displayTime}
             countDownTimer={this.countDownTimer}
           />
         </header>

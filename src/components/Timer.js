@@ -1,10 +1,10 @@
 import React from "react";
 
-function Timer({mode, displayTime, session_length, reset, countDownTimer}) {
+function Timer({mode, session_length, reset, countDownTimer}) {
   return (
     <React.Fragment>
       <h2 id="timer-label">{mode}</h2>
-      <div id="time-left">{`${displayTime < 10 ? 0 : ""}${displayTime}:00`}</div>
+      <div id="time-left">{`${session_length < 10 ? 0 : ""}${session_length}:00`}</div>
       <div className="wrapper">
         <button id="start_stop" onClick={() => {
           countDownTimer(session_length)
