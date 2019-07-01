@@ -52,8 +52,11 @@ class App extends React.Component {
     this.setState({
       break_length: 5,
       session_length: 25,
-      timerRunning: false
+      timerRunning: false,
+      mode: "Session"
     });
+
+    document.getElementById("time-left").innerText = "25:00"
 
     clearInterval(this.countdown);
   };
@@ -63,13 +66,28 @@ class App extends React.Component {
     const beginTime = Date.now();
     const endTime = beginTime + seconds * 1000;
     clearInterval(this.countdown);
-    this.displayTimeLeft(seconds);
+    // this.displayTimeLeft(seconds);
 
     this.countdown = setInterval(() => {
       const secondsLeft = Math.round((endTime - Date.now()) / 1000);
   
       if (secondsLeft < 0) {
         clearInterval(this.countdown);
+        // Switch between Break and Session mode
+        if(this.state.mode === "Session"){
+          this.setState({
+            mode: "Break"
+          });
+
+          this.countDownTimer(this.state.break_length);
+        } else if (this.state.mode === "Break"){
+          this.setState({
+            mode: "Session"
+          });
+
+          this.countDownTimer(this.state.session_length);
+        }
+
         return;
       }
       this.displayTimeLeft(secondsLeft);
@@ -103,6 +121,7 @@ class App extends React.Component {
             mode={this.state.mode}
             reset={this.reset}
             session_length={this.state.session_length}
+            break_length={this.state.break_length}
             countDownTimer={this.countDownTimer}
           />
         </header>
