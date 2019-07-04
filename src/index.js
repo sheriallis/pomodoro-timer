@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import ReactFCCtest from 'react-fcctest';
 
 import Timer from "./components/Timer";
+import Button from './components/Button'
 import Settings from "./components/Settings";
 
 import "./styles.css";
@@ -64,6 +65,10 @@ class App extends React.Component {
     clearInterval(this.countdown);
   };
 
+  pauseTimer = () => {
+    console.log(Date.now());
+  }
+
   countDownTimer = (minutes) => {
     const seconds = minutes * 60;
     const beginTime = Date.now();
@@ -123,11 +128,41 @@ class App extends React.Component {
         <header className="flex-center">
           <Timer
             mode={this.state.mode}
-            reset={this.reset}
             session_length={this.state.session_length}
             break_length={this.state.break_length}
-            countDownTimer={this.countDownTimer}
           />
+          <div className="wrapper">
+            
+            {this.state.timerRunning === false ?
+            
+            <Button 
+              id="start_stop"
+              onClick={() => {
+                this.countDownTimer(this.state.session_length)
+              }}
+              iconClass="fas fa-play"
+            > 
+              Start 
+            </Button>
+            :
+
+            <Button 
+              id="start_stop"
+              onClick={this.pauseTimer}
+              iconClass="fas fa-pause"
+            > 
+              Pause
+            </Button>
+            }
+
+            <Button 
+              id="reset"
+              onClick={this.reset}
+              iconClass="fas fa-sync-alt"
+            >
+              Reset
+            </Button>
+          </div>
         </header>
         <footer>
           <Settings
