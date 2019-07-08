@@ -13,34 +13,36 @@ class App extends React.Component {
     break_length: 5,
     session_length: 25,
     mode: "Session",
+    timer: 1500,
     timerRunning: false
   };
 
   increment = mode => {
-    if(this.state.timerRunning === true){
+    if(this.state.timerRunning){
       return;
     }
 
     if (mode === "session" && this.state.session_length <= 59) {
       this.setState({
         session_length: this.state.session_length + 1,
+        timer: this.state.timer + 60
       });
-    } else if (mode === "break" && this.state.break_length <= 59) {
+    } else if(mode === "break" && this.state.break_length <= 59) {
       this.setState({
         break_length: this.state.break_length + 1,
-
       });
     }
   };
 
   decrement = mode => {
-    if(this.state.timerRunning === true){
+    if(this.state.timerRunning){
       return;
     }
 
     if (mode === "session" && this.state.session_length >= 2) {
       this.setState({
         session_length: this.state.session_length - 1,
+        timer: this.state.timer - 60
       });
     } else if (mode === "break" && this.state.break_length >= 2) {
       this.setState({
@@ -57,62 +59,49 @@ class App extends React.Component {
       break_length: 5,
       session_length: 25,
       timerRunning: false,
+      timer: 1500,
       mode: "Session"
     });
-
-    document.getElementById("time-left").innerText = "25:00"
 
     clearInterval(this.countdown);
   };
 
   pauseTimer = () => {
-    console.log(Date.now());
+    clearInterval(this.countdown);
+    this.setState({timerRunning: false})
   }
 
-  countDownTimer = (minutes) => {
-    const seconds = minutes * 60;
-    const beginTime = Date.now();
-    const endTime = beginTime + seconds * 1000;
+  countDownTimer = (seconds) => {
     clearInterval(this.countdown);
-    // this.displayTimeLeft(seconds);
+
 
     this.countdown = setInterval(() => {
-      const secondsLeft = Math.round((endTime - Date.now()) / 1000);
-  
-      if (secondsLeft < 0) {
+      if(this.state.timer === 0 && this.state.mode === "Session"){
         this.beep.play();
-        clearInterval(this.countdown);
-        // Switch between Break and Session mode
-        if(this.state.mode === "Session"){
-          this.setState({
-            mode: "Break"
-          });
-
-          this.countDownTimer(this.state.break_length);
-        } else if (this.state.mode === "Break"){
-          this.setState({
-            mode: "Session"
-          });
-
-          this.countDownTimer(this.state.session_length);
-        }
-
-        return;
+        this.setState({mode: "Break", timer: this.state.break_length * 60});
       }
-      this.displayTimeLeft(secondsLeft);
+  
+      if(this.state.timer === 0 && this.state.mode === "Break"){
+        this.beep.play();
+        this.setState({mode: "Session", timer: this.state.session_length * 60});
+      }
+
+      this.setState({
+        timer: this.state.timer - 1
+      })
+
     }, 1000);
 
     this.setState({
       timerRunning: true
-    })
-
+    });
   }
 
   displayTimeLeft = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
 
-    document.getElementById("time-left").innerText = this.formatTime(minutes, remainingSeconds);
+    return this.formatTime(minutes, remainingSeconds);
   }
 
   formatTime = (minutes, remainingSeconds) => {
@@ -128,8 +117,7 @@ class App extends React.Component {
         <header className="flex-center">
           <Timer
             mode={this.state.mode}
-            session_length={this.state.session_length}
-            break_length={this.state.break_length}
+            timeLeft={this.displayTimeLeft(this.state.timer)}
           />
           <div className="wrapper">
             
@@ -138,7 +126,7 @@ class App extends React.Component {
             <Button 
               id="start_stop"
               onClick={() => {
-                this.countDownTimer(this.state.session_length)
+                this.countDownTimer(this.state.timer)
               }}
               iconClass="fas fa-play"
             > 
