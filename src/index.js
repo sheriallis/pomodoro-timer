@@ -78,12 +78,12 @@ class App extends React.Component {
     this.countdown = setInterval(() => {
       if(this.state.timer === 0 && this.state.mode === "Session"){
         this.beep.play();
-        this.setState({mode: "Break", timer: this.state.break_length * 60});
+        this.setState({mode: "Break", timer: this.state.break_length * 60 + 1});
       }
   
       if(this.state.timer === 0 && this.state.mode === "Break"){
         this.beep.play();
-        this.setState({mode: "Session", timer: this.state.session_length * 60});
+        this.setState({mode: "Session", timer: this.state.session_length * 60 + 1});
       }
 
       this.setState({
@@ -100,8 +100,11 @@ class App extends React.Component {
   displayTimeLeft = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
+    const formattedTime = this.formatTime(minutes, remainingSeconds);
 
-    return this.formatTime(minutes, remainingSeconds);
+    document.title = `(${formattedTime}) - Pomodoro Timer`;
+
+    return formattedTime;
   }
 
   formatTime = (minutes, remainingSeconds) => {
