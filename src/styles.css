@@ -42,8 +42,14 @@ button {
   font-size: 1.2rem;
   background-color: #fff;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 30px 8px 20px;
   margin: 8px;
+  transition: background-color .3s ease-in-out;
+}
+
+button:hover{
+  background-color: #411133;
+  color: #fff;
 }
 
 #app-container header {
@@ -62,6 +68,12 @@ button {
 .fa-arrow-circle-up {
   font-size: 2rem;
   color: #eb144c;
+  transition: color .3s ease-in-out;
+}
+
+.fa-arrow-circle-up:hover,
+.fa-arrow-circle-down:hover {
+  color: #411133;
 }
 
 .adjust-time {
@@ -89,11 +101,6 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.fa-arrow-circle-up:hover,
-.fa-arrow-circle-down:hover {
-  color: #134da0;
 }
 
 p {
