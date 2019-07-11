@@ -80,7 +80,7 @@ button:hover{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 60%;
 }
 
 footer {
@@ -105,4 +105,16 @@ footer {
 
 p {
   margin: 8px;
+}
+
+@media (min-width: 600px){
+  #app-container{
+    width: 480px;
+  }
+}
+
+@media (min-width: 1440px){
+  #app-container{
+    width: 780px;
+  }
 }
