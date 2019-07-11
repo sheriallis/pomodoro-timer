@@ -107,14 +107,43 @@ p {
   margin: 8px;
 }
 
+@media (max-width: 600px){
+  body {
+    justify-content: flex-start;
+  }
+
+  #app-container{
+    width: 100vw;
+  }
+  #app-container header, footer {
+    border-radius: 0;
+  }
+  footer {
+    flex-direction: column;
+  }
+  .time-adjust-wrapper{
+    margin-top: 8px;
+    width: 100%;
+  }
+  .adjust-time{
+    width: 50%;
+  }
+}
+
 @media (min-width: 600px){
   #app-container{
     width: 480px;
+  }
+  .adjust-time{
+    width: 90%;
   }
 }
 
 @media (min-width: 1440px){
   #app-container{
     width: 780px;
+  }
+  .adjust-time{
+    width: 60%;
   }
 }
