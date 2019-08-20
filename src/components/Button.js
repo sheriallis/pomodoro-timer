@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 
-function Button({id, onClick, iconClass, children}){
-  return(
-    <button 
-      id={id} 
-      onClick={onClick}>
-      <i className={iconClass}/> {children}
+function Button({ id, onClick, children, icon }) {
+  return (
+    <button id={id} onClick={onClick}>
+      {icon} {children}
     </button>
-  )
+  );
 }
 
 export default Button;

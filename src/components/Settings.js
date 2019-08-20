@@ -1,6 +1,7 @@
 import React from "react";
+import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
 
-function Settings({label, mode, length, increment, decrement}) {
+function Settings({ label, mode, length, increment, decrement }) {
   return (
     <div className="time-adjust-wrapper">
       <h3 id={`${mode}-label`}>{label} Length</h3>
@@ -11,7 +12,7 @@ function Settings({label, mode, length, increment, decrement}) {
             increment(mode);
           }}
         >
-          <i className="fas fa-arrow-circle-up" />
+          <FaArrowCircleUp className="fas fa-arrow-circle-up" />
         </span>
         <p>
           <span id={`${mode}-length`}>{length}</span> min
@@ -22,7 +23,7 @@ function Settings({label, mode, length, increment, decrement}) {
             decrement(mode);
           }}
         >
-          <i className="fas fa-arrow-circle-down" />
+          <FaArrowCircleDown className="fas fa-arrow-circle-down" />
         </span>
       </div>
     </div>

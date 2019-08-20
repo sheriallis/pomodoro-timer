@@ -39,15 +39,24 @@ h2 {
 }
 
 button {
+  display: inline-flex;
+  justify-content: space-between;
+  align-content: center;
   font-size: 1.2rem;
   background-color: #fff;
   border: none;
-  padding: 8px 30px 8px 20px;
+  padding: 12px 24px;
   margin: 8px;
-  transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
-button:hover{
+.fa-play,
+.fa-pause,
+.fa-sync-alt {
+  margin-right: 10px;
+}
+
+button:hover {
   background-color: #411133;
   color: #fff;
 }
@@ -66,9 +75,10 @@ button:hover{
 
 .fa-arrow-circle-down,
 .fa-arrow-circle-up {
-  font-size: 2rem;
+  height: 40px;
+  width: 40px;
   color: #eb144c;
-  transition: color .3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .fa-arrow-circle-up:hover,
@@ -107,43 +117,44 @@ p {
   margin: 8px;
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
   body {
     justify-content: flex-start;
   }
 
-  #app-container{
+  #app-container {
     width: 100vw;
   }
-  #app-container header, footer {
+  #app-container header,
+  footer {
     border-radius: 0;
   }
   footer {
     flex-direction: column;
   }
-  .time-adjust-wrapper{
+  .time-adjust-wrapper {
     margin-top: 8px;
     width: 100%;
   }
-  .adjust-time{
+  .adjust-time {
     width: 50%;
   }
 }
 
-@media (min-width: 600px){
-  #app-container{
+@media (min-width: 600px) {
+  #app-container {
     width: 480px;
   }
-  .adjust-time{
+  .adjust-time {
     width: 90%;
   }
 }
 
-@media (min-width: 1440px){
-  #app-container{
+@media (min-width: 1440px) {
+  #app-container {
     width: 780px;
   }
-  .adjust-time{
+  .adjust-time {
     width: 60%;
   }
 }
