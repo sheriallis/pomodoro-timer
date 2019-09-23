@@ -106,7 +106,7 @@ class App extends React.Component {
     const remainingSeconds = seconds % 60;
     const formattedTime = this.formatTime(minutes, remainingSeconds);
 
-    document.title = `(${formattedTime}) - Pomodoro Timer`;
+    document.title = `(${formattedTime}) ${this.state.mode} - Pomodoro Timer`;
 
     return formattedTime;
   };
