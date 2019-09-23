@@ -177,7 +177,7 @@ class App extends React.Component {
         <audio
           id="beep"
           preload="auto"
-          src="pomodoro-beep.mp3"
+          src="harp-chord-glissando.mp3"
           ref={audio => {
             this.beep = audio;
           }}
